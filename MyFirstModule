@@ -1,0 +1,10 @@
+exports.givedate= function () {
+    return Date();
+};
+
+/* another wAy of creating a function */
+
+exports.myname=()=>{
+    return "Muhib"
+
+}
