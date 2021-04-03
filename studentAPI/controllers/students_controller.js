@@ -7,9 +7,9 @@ exports.test= (req,res)=>{
 
 exports.create= (req,res,next)=>{
     let student = new student2({
-        name: req.body.name,
-        id: req.body.id,
-        dept: req.body.dept
+        name: req.params.name,
+        id: req.params.id,
+        dept: req.params.dept
     })
 
         student.save((err)=>{
@@ -19,20 +19,20 @@ exports.create= (req,res,next)=>{
         })}
 
 exports.delete= (req,res)=>{
-    student.findByIdAndRemove(req.params.id, (err)=>{
+    student2.findByIdAndDelete(req.params.id, (err)=>{
         if (err) return next(err);
         res.send("Object Deleted!!!!!")
 })}
 
-exports.put= (req,res)=>{
-    student.findById(req.params.id, (err,student)=>{
-        if(err) return next(err);
-        res.send(student)
-    })}
-
+exports.details = function (req, res) {
+    student2.findById(req.params.id, function (err,student) {
+            if (err) return next(err);
+            res.send(student);
+        })
+    };
 
 exports.update=(req,res)=>{
-    student.findByIdAndUpdate(req.params.id, {$set: req.body}, (err,student)=>{
+    student2.findByIdAndUpdate(req.params.id, {$set: req.body}, (err,student)=>{
         if(err) return next (err);
         res.send("Student Updated!!!") 
     })}   
